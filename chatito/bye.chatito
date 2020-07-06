@@ -1,0 +1,18 @@
+// Ways to say goodbye
+
+import ./common.chatito
+
+%[bye]('training': '50', 'testing': '50')
+    *[20%] ~[bye]
+    ~[thanks?] ~[bye]
+    ~[bye] ~[thanks?]
+    ~[leaving]
+    ~[leaving] ~[bye]
+
+~[bye]
+    再见
+    拜拜
+
+~[leaving]
+    下次见
+    下次再聊

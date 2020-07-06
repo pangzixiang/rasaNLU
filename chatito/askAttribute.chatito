@@ -1,0 +1,38 @@
+import ./common.chatito
+
+# Ways to request a restaurant within a location (using probability operator)
+# NOTE: 60% of the examples should come from the first sentence, and 40% from the second
+
+%[ask_attribute]('training': '100')
+    *[25%] ~[hi?] ~[please?] ~[find?] @[attribute] @[entity_type] ~[covid?] ~[thanks?]
+    *[25%] @[entity_type] @[attribute] ~[find?]
+    *[25%] ~[hi?] ~[please?] ~[find?] @[attribute] @[entity_type] ~[covid?] ~[thanks?]
+    *[25%] @[entity_type] @[attribute] ~[find?]
+
+@[entity_type]
+    ~[新冠肺炎]
+    ~[庞子翔]
+
+~[新冠肺炎]('synonym': 'true')
+    新冠
+    冠状肺炎
+    新冠肺炎
+    COVID-19
+
+~[庞子翔]('synonym':'true')
+    帅哥
+    翔哥
+    庞哥
+
+~[find]
+    问
+    什么
+    怎么
+
+@[attribute]
+    ~[定义]
+
+~[定义]('synonym':'true')
+    是
+    定义
+    简介

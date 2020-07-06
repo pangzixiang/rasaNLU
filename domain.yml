@@ -1,0 +1,28 @@
+intents:
+  - greet
+  - bye
+  - ask_attribute
+
+responses:
+  utter_greet:
+  - text: "Hey! How are you?"
+
+  utter_bye:
+  - text: "Bye"
+
+entities:
+  - entity_type
+  - attribute
+
+slots:
+  entity_type:
+    type: text
+  attribute:
+    type: text
+
+actions:
+  - action_ask_attribute
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
