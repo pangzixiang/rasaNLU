@@ -11,13 +11,13 @@ responses:
   - text: "Bye"
 
 entities:
-  - entity_type
   - attribute
+  - entity_type
 
 slots:
-  entity_type:
-    type: text
   attribute:
+    type: text
+  entity_type:
     type: text
 
 actions:
