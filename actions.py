@@ -28,6 +28,7 @@
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from neo4j import GraphDatabase
+from rasa_sdk.events import SlotSet
 
 def check_entity_unique(entity_name, session):
     cypher = "match(a) where a.name =~'.*"+entity_name+".*' and not 'attribute' in labels(a) return a.name"
@@ -53,33 +54,40 @@ class ActionAskAttribute(Action):
         return "action_ask_attribute"
 
     def run(self, dispatcher, tracker, domain):
-        driver = GraphDatabase.driver("bolt://localhost:7687", auth=("neo4j", "Aa-12345678"))
+        driver = GraphDatabase.driver("bolt://121.43.191.246:7687", auth=("neo4j", "Aa-12345678"))
         session = driver.session()
         entity_name = tracker.get_slot("entity_type")
         attribute = tracker.get_slot("attribute")
+        print(entity_name, attribute)
 
         check_entity = check_entity_unique(entity_name, session)
         if len(check_entity) == 0:
             dispatcher.utter_message(text="对不起，我不是很了解'"+entity_name+"'")
-            return []
+            slots = [SlotSet("entity_type", None), SlotSet("attribute", None)]
+            return slots
         elif len(check_entity) > 1:
             dispatcher.utter_message(text="关于'"+entity_name+"'，我了解到以下内容和它类似，请重新告诉我您想知道哪一个：")
             for i, e in enumerate(check_entity):
                 dispatcher.utter_message(f"{i + 1}: {e}")
-            return []
+            slots = [SlotSet("entity_type", None), SlotSet("attribute", None)]
+            return slots
         else:
             checkAttr = check_attribute(entity_name, session)
             if attribute not in checkAttr:
-                dispatcher.utter_message(text="对不起，我不知道'" + entity_name + "'的'" + attribute + "'是什么")
+                if attribute is not None:
+                    dispatcher.utter_message(text="对不起，我不知道'" + entity_name + "'的'" + attribute + "'是什么")
                 dispatcher.utter_message(text="我只知道'"+entity_name+"'的以下属性：")
                 for i, e in enumerate(checkAttr):
                     dispatcher.utter_message(f"{i + 1}: {e}")
-                return []
+                slots = [SlotSet("entity_type", None), SlotSet("attribute", None)]
+                return slots
             else:
                 dispatcher.utter_message(text="'" + entity_name + "'的'" + attribute + "'为'" + final_query(entity_name, attribute, session) + "'")
-                return []
+                slots = [SlotSet("entity_type", None), SlotSet("attribute", None)]
+                return slots
 
 
         # dispatcher.utter_message(text=result)
         # print(tracker.current_slot_values(),tracker.get_slot("attribute"),tracker.get_slot("entity_type"))
-        # return []
+        slots = [SlotSet("entity_type", None), SlotSet("attribute", None)]
+        return slots
