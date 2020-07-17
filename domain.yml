@@ -2,6 +2,8 @@ intents:
   - greet
   - bye
   - ask_attribute
+  - ask_entity
+  - ask_mention
 
 responses:
   utter_greet:
@@ -13,15 +15,22 @@ responses:
 entities:
   - attribute
   - entity_type
+  - mention
 
 slots:
   attribute:
     type: text
   entity_type:
     type: text
+  mention:
+    type: text
+  li:
+    type: text
 
 actions:
   - action_ask_attribute
+  - action_ask_entity
+  - action_ask_mention
 
 session_config:
   session_expiration_time: 60
