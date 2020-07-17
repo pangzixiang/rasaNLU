@@ -1,0 +1,17 @@
+import ./common.chatito
+import ./entity_role.chatito
+
+%[ask_attribute]('training': '10000')
+    *[40%] ~[hi?]~[please?]~[find]@[entity_type]~[aux]@[attribute]~[what]~[thanks?]
+    *[30%] @[entity_type]~[aux]@[attribute]~[what?]
+    *[30%] @[attribute]~[what?]
+
+%[ask_entity]('training':'10000')
+    *[40%] ~[hi?]~[please?]~[find]@[entity_type]~[what]~[thanks?]
+    *[30%] ~[ask]@[entity_type]~[what?]
+    *[30%] @[entity_type]
+
+%[ask_mention]('training':'1000')
+    *[20%] @[mention]
+    *[40%] ~[please?]~[find]@[mention]
+    *[40%] ~[ask]@[mention]
