@@ -2,7 +2,7 @@
 - rasa NLU and rasa Core
 - neo4j graph database
 
-### chatito DSL for create train dataset
+### chatito DSL (create train dataset)
 https://rodrigopivi.github.io/Chatito/
 
 ## rasa start:
