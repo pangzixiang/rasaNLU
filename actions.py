@@ -77,7 +77,7 @@ class ActionAskAttribute(Action):
         return "action_ask_attribute"
 
     def run(self, dispatcher, tracker, domain):
-        driver = GraphDatabase.driver("bolt://121.43.191.246:7687", auth=("neo4j", "Aa-12345678"))
+        driver = GraphDatabase.driver("bolt://xxxxxx", auth=("neo4j", "xxxxxx"))
         session = driver.session()
         entity_name = tracker.get_slot("entity_type")
         attribute = tracker.get_slot("attribute")
@@ -95,7 +95,7 @@ class ActionAskEntity(Action):
         return "action_ask_entity"
 
     def run(self, dispatcher, tracker, domain):
-        driver = GraphDatabase.driver("bolt://121.43.191.246:7687", auth=("neo4j", "Aa-12345678"))
+        driver = GraphDatabase.driver("bolt://xxxxxx", auth=("neo4j", "xxxxxx"))
         session = driver.session()
         entity_name = tracker.get_slot("entity_type")
         attribute = tracker.get_slot("attribute")
@@ -130,7 +130,7 @@ class ActionAskMention(Action):
         return "action_ask_mention"
 
     def run(self, dispatcher, tracker, domain):
-        driver = GraphDatabase.driver("bolt://121.43.191.246:7687", auth=("neo4j", "Aa-12345678"))
+        driver = GraphDatabase.driver("xxxxxx", auth=("neo4j", "xxxxxxx"))
         session = driver.session()
         mention = tracker.get_slot("mention")
         entity = tracker.get_slot("entity_type")
