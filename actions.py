@@ -56,9 +56,10 @@ def query_attribute(entity_name, attribute, dispatcher, session):
         if attribute not in checkAttr:
             if attribute is not None:
                 dispatcher.utter_message(text="对不起，我不知道'" + entity_name + "'的'" + attribute + "'是什么")
-            dispatcher.utter_message(text="我只知道'" + entity_name + "'的以下属性：")
-            for i, e in enumerate(checkAttr):
-                dispatcher.utter_message(f"{i + 1}: {e}")
+            if len(checkAttr) > 0:
+                dispatcher.utter_message(text="我只知道'" + entity_name + "'的以下属性：")
+                for i, e in enumerate(checkAttr):
+                    dispatcher.utter_message(f"{i + 1}: {e}")
             slots = [SlotSet("attribute", None)]
             return slots
         else:
